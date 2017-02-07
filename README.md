@@ -9,7 +9,7 @@ events I like to relax and search with one hand. I came up with this solution to
 
 ##Installing
 - Download the package.zip onto your machine and unzip into any location of your choosing.
-- Go to Chrome Extensions (chrome://extensions) and on the top right corner, check "Developer Mode".
+- Go to Chrome Extensions [Chrome Extensions](chrome://extensions) and on the top right corner, check "Developer Mode".
 - You will see three new buttons, one being "Load unpacked extension...". Click that button.
 - Search and select the folder where you unpacked the extension, load it, and you're all set.
 
