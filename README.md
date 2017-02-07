@@ -20,7 +20,7 @@ events I like to relax and search with one hand. I came up with this solution to
 - Chrome.tabs API
 
 ##Permissions
-This extension requires the 'tabs' permission in order to access the current URL as well as open new tabs.
+This extension requires the chrome 'tabs' permission in order to access the current URL as well as open new tabs.
 If you click "Permissions" under the extension name, it says it can read your browsing history. This extension
 does not access any history, but it does access the current URL, so that's possibly where that comes from.
 
