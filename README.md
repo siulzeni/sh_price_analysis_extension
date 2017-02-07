@@ -7,6 +7,9 @@ When I browse StubHub event listings looking for new artists and events, I alway
 Analysis tool usually takes me 3 to 4 clicks and a copy/pase. I know it's not a lot, but when I laizly browse for new
 events I like to relax and search with one hand. I came up with this solution to further enable my laziness.
 
+#How It Works
+Simply go to the event page and click the extension button. It will open Price Analysis for that particular event. Simple as that
+
 ##Installing
 - Download the package.zip onto your machine and unzip into any location of your choosing.
 - Go to Chrome Extensions (chrome://extensions) and on the top right corner, check "Developer Mode".
