@@ -1,5 +1,5 @@
 #StubHub Price Analysis Extension
-This is a Chrome Extension that makes opening StubHub Price Analysis from an Event's page
+This is a Chrome Extension that makes opening StubHub Price Analysis from an Event's page or a link from your clipboard,
 as easy as one click.
 
 ##Motivation
@@ -8,7 +8,10 @@ Analysis tool usually takes me 3 to 4 clicks and a copy/pase. I know it's not a 
 events I like to relax and search with one hand. I came up with this solution to further enable my laziness.
 
 #How It Works
-Simply go to the event page and click the extension button. It will open Price Analysis for that particular event. Simple as that
+It works one of two ways:
+- Go to the event page and click the extension button.
+- Copy the link address of an event and click the extension button.
+This will open Price Analysis for that particular event. Simple as that.
 
 ##Installing
 - Download the package.zip onto your machine and unzip into any location of your choosing.
@@ -20,12 +23,13 @@ Simply go to the event page and click the extension button. It will open Price A
 - JavaScript
 - HTML
 - XML
+- CSS
 - Chrome.tabs API
 
 ##Permissions
-This extension requires the chrome 'tabs' permission in order to access the current URL as well as open new tabs.
-If you click "Permissions" under the extension name, it says it can read your browsing history. This extension
-does not access any history, but it does access the current URL, so that's possibly where that comes from.
+Chrome Permissions:
+- tabs: Used to access chrome tabs API in order to get current tab URL. No history is accessed.
+- clipboardRead: Used to get top most clipboard data.
 
 ##Issues
 I've been using it for a while, I've found no bugs so far. If you find any, please let me know
