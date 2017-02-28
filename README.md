@@ -1,17 +1,17 @@
 #StubHub Price Analysis Extension
-This is a Chrome Extension that makes opening StubHub Price Analysis from an Event's page or a link from your clipboard,
-as easy as one click.
+This is a Chrome Extension that makes opening StubHub Price Analysis as easy as one click.
 
 ##Motivation
 When I browse StubHub event listings looking for new artists and events, I always like to check demand. Opening the Price
 Analysis tool usually takes me 3 to 4 clicks and a copy/pase. I know it's not a lot, but when I laizly browse for new
 events I like to relax and search with one hand. I came up with this solution to further enable my laziness.
 
-#How It Works
-It works one of two ways:
-- Go to the event page and click the extension button.
-- Copy the link address of an event and click the extension button.
-This will open Price Analysis for that particular event. Simple as that.
+#How/Where It Works
+Click extension when:
+- On the event page.
+- There is an event link in your clipboard.
+- If already on Price Analysis, click to open SellHub.
+- All of this also works on pro StubHub
 
 ##Installing
 - Download the package.zip onto your machine and unzip into any location of your choosing.
@@ -33,6 +33,9 @@ Chrome Permissions:
 
 ##Issues
 I've been using it for a while, I've found no bugs so far. If you find any, please let me know
+
+##Troubleshooting
+If Price Analysis does not work or SellHub keeps looping, sign in and out of SH. It's a problem with their site.
 
 ##Why didn't I upload it to the Chrome Web Store?
 It's a very niche extension thus I didn't deem it worthy to upload to the Chrome Web Store. Distribution

@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "StubHub Price Analysis",
     "description": "Opens SH Price Analysis From Event Page In One Click",
-    "version": "1.1",
+    "version": "1.2",
 
 
     "browser_action": {
