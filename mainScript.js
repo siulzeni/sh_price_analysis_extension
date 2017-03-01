@@ -109,8 +109,9 @@ function getEventID(tab_url) {
     }
     else{ // no/no
         // if user is on stubhub, let them know to copy event address
-        if(check_if_on_sh_bool){
-            message_span.innerText = "Visit StubHub Events or Copy Event Address"
+        if(check_if_on_sh_bool && !check_clipboard_bool){
+            // message_span.innerText = "Visit StubHub Events or Copy Event Address"
+            getGeneralSellHubURL(clipboard_text, current_tab_index);
         }
         else message.innerText = "Visit StubHub Events"
     }
@@ -130,6 +131,12 @@ function getSellHubURL(eventID, current_tab_index){
     var eventID = new String(eventID);
     var sellHubURL = "https://www.stubhub.com/sell/hub/login?eventId=" + eventID;
     openNewTabWithURL(sellHubURL, current_tab_index);
+}
+
+function getGeneralSellHubURL(urlQuery, current_tab_index){
+    urlQuery = encodeURIComponent(urlQuery);
+    var genSellHub = "https://www.stubhub.com/sell/hub/performerSearch?id=" + urlQuery;
+    openNewTabWithURL(genSellHub, current_tab_index);
 }
 
 // Opens link in new tab

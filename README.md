@@ -11,6 +11,9 @@ Click extension when:
 - On the event page.
 - There is an event link in your clipboard.
 - If already on Price Analysis, click to open SellHub.
+- If artist/event name is in clipboard, general SellHub 
+  search will be performed in any page except events/price 
+  analysis(not 100% accurate due to Stubhub inconcistancy).
 - All of this also works on pro StubHub
 
 ##Installing
@@ -32,7 +35,7 @@ Chrome Permissions:
 - clipboardRead: Used to get top most clipboard data.
 
 ##Issues
-I've been using it for a while, I've found no bugs so far. If you find any, please let me know
+I've been using it for a while, I've found no bugs so far. If you find any, please let me know.
 
 ##Troubleshooting
 If Price Analysis does not work or SellHub keeps looping, sign in and out of SH. It's a problem with their site.
