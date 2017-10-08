@@ -43,19 +43,22 @@ function checkIfURL(str){
 
 
 // **Gets tab ID in order to extract the URL
-function getTabInfo(callback){
+function getTabInfo(callback, selection, contextMenuClickFlag){
     
     chrome.tabs.query({"active": true, "currentWindow": true}, function Tab(tab) {
-        callback(tab); // pass tab to callback
+        callback(tab, selection, contextMenuClickFlag); // pass tab to callback
     });
 }
 
 // ** Parse the URL to extract event ID
-function getEventID(tab_url) {
+function getEventID(tab_url, selection, contextMenuClickFlag) {
+
 
     var current_tab_index = tab_url[0].index; // index is needed in order to open new tab next to previous tab
+    console.log("Current Tab Index: ",current_tab_index);
     var string_url = new String(tab_url[0].url); // string URL
-    var message_span = document.getElementById("message"); // element that displays error messages
+    // console.log(string_url);
+    // var message_span = document.getElementById("message"); // element that displays error messages
     var clipboard_text = getClipboardText(); // gets text from clipboard
     // Bools
     var check_clipboard_bool = checkIfURL(clipboard_text);
@@ -89,32 +92,54 @@ function getEventID(tab_url) {
         }
     }
 
-    
-    // conditionals for various scenarios eg "on events page, but also have link on clipboard"
-    if(check_tab_url_bool && !check_clipboard_bool){ // on events page, no link found (most common scenario)
-        process(string_url);
+    if(contextMenuClickFlag == false){
+        // conditionals for various scenarios eg "on events page, but also have link on clipboard"
+        if(check_tab_url_bool && !check_clipboard_bool){ // on events page, no link found (most common scenario)
+            process(string_url);
+        }
+        else if(!check_tab_url_bool && check_clipboard_bool){ // not on events page, link found
+            process(clipboard_text);
+            
+        }
+        else if(check_tab_url_bool && check_clipboard_bool){ // yes/yes, events page takes precedence
+            process(string_url);
+        }
+        else{ // no/no
+            // if user is on stubhub, let them know to copy event address
+            if(!check_clipboard_bool){
+                getGenerateSearchQueryURL(clipboard_text, current_tab_index);
+            }
+            // else message.innerText = "Visit StubHub Events"
+        }
     }
-    else if(!check_tab_url_bool && check_clipboard_bool){ // not on events page, link found
-        if(check_if_on_sh_bool){ // only open link if user is on stubhub site
+    else{
+        var selection_url = selection.linkUrl;
+        var selection_text_bool = typeof(selection.selectionText) == "undefined"
+        console.log("selection_text", selection_text_bool);
+        var context_menu_url_bool = checkIfURL(selection_url);
+        console.log("Context menu url: ", context_menu_url_bool);
+
+
+        if(context_menu_url_bool){
+            process(selection_url);
+        }
+        else if(!selection_text_bool){
+            getGenerateSearchQueryURL(selection.selectionText, current_tab_index);
+        }
+        else if(!context_menu_url_bool && check_tab_url_bool){
+            process(string_url);
+        }
+        else if(!context_menu_url_bool && !check_tab_url_bool && check_clipboard_bool){
             process(clipboard_text);
         }
-        else{ // link found, but not on stubhub
-            message_span.innerText = "Visit StubHub Events"
-            return;
+        else{ 
+            if(!check_clipboard_bool){
+                getGenerateSearchQueryURL(clipboard_text, current_tab_index);
+            }
         }
 
-    }
-    else if(check_tab_url_bool && check_clipboard_bool){ // yes/yes, events page takes precedence
-        process(string_url);
-    }
-    else{ // no/no
-        // if user is on stubhub, let them know to copy event address
-        if(check_if_on_sh_bool && !check_clipboard_bool){
-            // message_span.innerText = "Visit StubHub Events or Copy Event Address"
-            getGeneralSellHubURL(clipboard_text, current_tab_index);
         }
-        else message.innerText = "Visit StubHub Events"
-    }
+
 }
 
 // **Generates PriceAnalysis URL with given eventID
@@ -124,7 +149,6 @@ function getStubHubURL(eventID, current_tab_index){
     // concatenate eventID to base URL
     var priceAnalysisURL = "https://sell.stubhub.com/simweb/sim/services/priceanalysis?eventId=" + event_id + "&external=true&page=true";
     openNewTabWithURL(priceAnalysisURL, current_tab_index);
-
 }
 
 function getSellHubURL(eventID, current_tab_index){
@@ -133,18 +157,41 @@ function getSellHubURL(eventID, current_tab_index){
     openNewTabWithURL(sellHubURL, current_tab_index);
 }
 
-function getGeneralSellHubURL(urlQuery, current_tab_index){
+function getGenerateSearchQueryURL(urlQuery, current_tab_index){
     urlQuery = encodeURIComponent(urlQuery);
-    var genSellHub = "https://www.stubhub.com/sell/hub/performerSearch?id=" + urlQuery;
+    var genSellHub = "https://www.stubhub.com/find/s/?q=" + urlQuery;
     openNewTabWithURL(genSellHub, current_tab_index);
 }
 
 // Opens link in new tab
 function openNewTabWithURL(url, current_tab_index){
     var next_to_current = current_tab_index + 1 // used to open new tab next to current tab by incrementing current tab index
-    chrome.tabs.create({ url: url, index: next_to_current});
+    chrome.tabs.create({ "url": url, "index": next_to_current});
 }
 
 // Run
-getTabInfo(getEventID);
+function clicked(selection, contextMenuClickFlag){
+    getTabInfo(getEventID, selection, contextMenuClickFlag);
+}
 
+chrome.browserAction.onClicked.addListener(function(){
+    var selection = "";
+    clicked(selection, false);
+    console.log("clicked");
+    }
+);
+
+chrome.contextMenus.create({
+    id:"priceAnalysis",
+    title: "Price Analysis", 
+    contexts:["all"], 
+  });
+
+  chrome.contextMenus.onClicked.addListener(function(selection){
+        // console.log("Clicked context menu action");
+        // console.log("Selection: ", selection);
+        // console.log("Selection Text: ", selection.selectionText);
+    if(selection.menuItemId == "priceAnalysis"){
+        clicked(selection, true);
+    }
+  });

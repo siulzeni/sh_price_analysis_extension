@@ -1,22 +1,30 @@
 {
     "manifest_version": 2,
-    "name": "StubHub Price Analysis",
-    "description": "Opens SH Price Analysis From Event Page In One Click",
-    "version": "1.2",
+    "name": "SH Price Analysis",
+    "description": "Navigate To StubHub Price Analysis In One Easy Click",
+    "version": "2.0",
 
 
     "browser_action": {
-        "default_icon": "icon.png",
-        "default_title": "Click Here!",
-        "default_popup": "popup.html"
-            // background is ommitted to conserve resources. 
-            // It makes the click response a little slower, uncomment for faster resposne
-            // },
-            // "background":{
-            //     "scripts": ["mainScript.js"]
+        "default_icon": "icons/icon24.png",
+        "default_title": "Click Here!"
     },
+    "background": {
+        "scripts": ["mainScript.js"],
+        "persistent": false 
+    },
+
+    "icons": { 
+        "24": "icons/icon24.png",
+        "48": "icons/icon48.png",
+        "128": "icons/icon128.png"
+     },
+
+
     "permissions": [
         "tabs",
-        "clipboardRead"
+        "activeTab",
+        "clipboardRead",
+        "contextMenus"
     ]
 }
