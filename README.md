@@ -25,12 +25,12 @@ Click extension when:
 - You will see three new buttons, one being "Load unpacked extension...". Click that button.
 - Search and select the folder where you unpacked the extension, load it, and you're all set.
 
-## Built with
+## Stack
 - JavaScript
 - HTML
-- XML
 - CSS
-- Chrome.tabs API
+- Chrome APIs
+(Popup has been removed. No longer incorporates HTML or CSS for now)
 
 ## Permissions
 Chrome Permissions:
